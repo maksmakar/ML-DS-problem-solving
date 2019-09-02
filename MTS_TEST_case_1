@@ -1,0 +1,39 @@
+Задание 1.
+
+Вариант 1:
+
+select distinct cnt.id_contact 
+from 
+[contact] cnt
+left join [check] ch
+on ch.[id_contact] = cnt.[id_contact]
+
+left join [service] sr
+on sr.[id_service] = ch.[id_service]  
+
+where cnt.sex = 2 
+and cnt.[registration_date] > '2016-06-12'
+and ch.data between '2018-01-01' and '2018-01-07'
+and ch.id_region in ('id_MSK', 'id_MSK_distr')
+and sr.service = 'Автоплатеж'
+and ch.id_contact in (select id_contact from check
+group by id_contact
+having sum(cost_discount) > 10000)
+
+Вариант 2:
+
+select distinct id_contact from (select cnt.id_contact, sum(ch.cost_discount) over (partition by ch.id_contact) as sum_2017 
+from 
+[contact] cnt
+left join [check] ch
+on ch.[id_contact] = cnt.[id_contact]
+
+left join [service] sr
+on sr.[id_service] = ch.[id_service]  
+
+where cnt.sex = 2 
+and cnt.[registration_date] > '2016-06-12'
+and ch.data between '2018-01-01' and '2018-01-07'
+and ch.id_region in ('id_MSK', 'id_MSK_distr')
+and sr.service = 'Автоплатеж')
+where sum_2017 > 10000
