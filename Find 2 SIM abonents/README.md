@@ -1,4 +1,4 @@
-## h2 Task:
+## Task:
 Due to the active expansion of communication services, many (not all) people buy more than one SIM card or use corporate SIM cards. The company is faced with the task of identifying subscribers (msisdn), which are, actually, one Person (person).
 To solve this problem, it is proposed to use data about the movements of subscribers, collected from base stations. Moves of mobile subscribers are registered at base stations. Registering a subscriber at a base station means staying within the coverage area of a given base station. The operation zones of different base stations intersect. At the same point on the ground, there are usually several base stations that either "look" in different directions or support different standards (2G / 3G).
 Required:
